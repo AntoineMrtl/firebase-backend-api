@@ -1,0 +1,60 @@
+PermType: true|false { 
+    sendMessages,
+    sendPhotos,
+    sendVideos,
+    sendAudios,
+    sendFiles,
+    sendGifs,
+    sendLinks,
+    addMembers,
+    PinMessages
+}
+
+REGISTER (BY USER) :
+
+Register a user using email and password
+body : {email: string, password: string}
+return : response, refresh token, access token, expiration time
+
+LOGIN (BY USER) :
+
+Login a user using email and password
+body : {email: string, password: string}
+return : response, refresh token, access token, expiration time
+
+LOGOUT (BY USER) :
+
+Logout
+header : access token
+return : response
+
+PUSH_DOC (BY USER) :
+
+=> /push_doc?location_type:"userStorage"|"groupStorage"&storage_id:number
+
+Push a document to the user's secure database
+header : access token
+body : document
+return : response
+
+GET_DOC (BY USER) :
+
+=> /get_doc?path:string
+
+Get a document from cloud storage
+header : access token
+return : response
+
+REFRESH (BY APP) :
+
+Refresh access token using refresh token
+header : refresh_token, uid
+return : response, access token, expiration time
+
+SET_PERMISSIONS (BY USER) :
+
+=> /set_permissions?collection_id:"self":string&perms:*PermType*:true|false
+
+Set member permissions for a collection or a user storage
+header : access token
+return : response
